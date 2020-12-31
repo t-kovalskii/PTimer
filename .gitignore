@@ -1,3 +1,13 @@
+# Illustrator templates
+ai/
+
+# vscode
+.vscode/
+
+# create-react-app stuff
+node_modules/
+.eslintcache
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

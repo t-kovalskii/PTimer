@@ -1,2 +1,3 @@
 # PTimer
-Web pomodoro timer
+
+The project is being developed
