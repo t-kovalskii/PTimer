@@ -1,0 +1,20 @@
+.appheader {
+    background-color: rgb(237, 28, 36);
+}
+.appname {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 32px;
+    color: white;
+}
+.crown {
+    background: none;
+    border: none;
+    outline: none;
+}
+.crown_path {
+    transition: fill .5s;
+    fill: white;
+}
+.crown_path-hovered {
+    fill: rgb(206, 206, 206);
+}
