@@ -1,0 +1,18 @@
+/* State label style */
+.timerstate {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 38px;
+}
+
+/* Timer face */
+.timeLabel {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 96px;
+}
+
+/* Buttons */
+.buttonCaption {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 80px;
+  fill: white;
+}
