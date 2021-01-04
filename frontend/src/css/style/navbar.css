@@ -12,9 +12,10 @@
     outline: none;
 }
 .crown_path {
-    transition: fill .5s;
+    transition: fill .25s;
     fill: white;
 }
 .crown_path-hovered {
+    transition: fill .25s;
     fill: rgb(206, 206, 206);
 }

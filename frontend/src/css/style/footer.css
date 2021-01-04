@@ -1,0 +1,27 @@
+/* Logos */
+.logoBox {
+  border-top: 3px solid #A0A09F;
+  margin: 0 5%;
+}
+.githubPath, .twitterPath {
+  transition: fill .25s;
+  fill: #A0A09F;
+}
+.githubPath:hover {
+  fill: #231E1B;
+}
+.twitterPath:hover {
+  fill: #1DA1F2;
+}
+
+/* Copyright */
+#copyright, #license {
+  font-family: 'Source Sans Pro', sans-serif;
+}
+#gplLink, #sourceLink {
+  transition: color .25s;
+  color: #A0A09F;
+}
+#gplLink:hover, #sourceLink:hover {
+  color: black;
+}
