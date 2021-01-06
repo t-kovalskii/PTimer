@@ -9,7 +9,7 @@ import '../css/override.css';
 
 export default function App(props) {
     return (
-      <div>
+      <div id="appBlock">
         <Navbar />
         <Main />
         <Footer />

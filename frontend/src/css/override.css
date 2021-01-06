@@ -1,3 +1,8 @@
+/* This file overrides default browser's css 
+*  and manipulates the style of the app block */
 body {
     margin: 0;
+}
+.appBlock {
+    z-index: 0;
 }
