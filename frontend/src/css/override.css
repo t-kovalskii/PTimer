@@ -1,6 +1,7 @@
 /* This file overrides default browser's css 
 *  and manipulates the style of the app block */
 body {
+    min-width: 255px;   
     margin: 0;
 }
 .appBlock {

@@ -23,6 +23,7 @@
   bottom: 15%;
   margin: auto;
   background: white;
+  min-width: 215px;
 }
 
 .popupInner > input {
@@ -45,6 +46,7 @@
   flex-direction: row;
   margin: 10px;
 }
+ 
 .generalSettings {
   margin-bottom: 15px;
 }
@@ -60,4 +62,14 @@
 
 #okButton {
   margin: auto;
+}
+
+@media screen and (max-width: 660px) {
+  .field {
+    flex-direction: column;
+    text-align: center;
+  }
+  .rightSlot {
+    margin: 5px auto;
+  }
 }

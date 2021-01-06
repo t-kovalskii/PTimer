@@ -11,6 +11,12 @@ footer {
     margin-top: 25px;
   }
 }
+@media screen and (max-width: 600px) {
+  footer {
+    position: relative;
+    margin-top: 25px;
+  }
+}
 
 /* Logo Box */
 .logoBox {
