@@ -1,6 +1,6 @@
 import React from 'react';
 
-import WorkCircle from './svg/workCircle'
+import WorkCircle from './svg/workCircle';
 
 /* Time left label and colored circles at the center 
 *  of the timer */

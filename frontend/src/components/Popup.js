@@ -13,13 +13,50 @@ import '../css/style/popup.css'
 class Popup extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {switchOn: true};
+
+    console.log(document.cookie);
+
+    this.state = {
+      switchOn: true,
+      pomodoros: 4,
+      working: 25,
+      break: 5,
+      long_break: 15
+    };
+
+    this.save = this.save.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.switch = this.switch.bind(this);
+  }
+
+  componentDidMount() {
+    for (let cookie of document.cookie.split('; ')) {
+      let [name, value] = cookie.split('=');
+      this.setState({[name]: value});
+    }
   }
 
   switch() {
     this.setState(state => {
-      return {switchOn: !state.switchOn};
+      return {switchOn: state.switchOn === 'true' ? 'false' : 'true'};
+    });
+  }
+
+  save() {
+    // saving the cookies for a mounth
+    for (let cookie of ['switchOn', 'pomodoros', 'working', 'break', 'long_break']) {
+      let setting = `${cookie}= ${this.state[cookie]};`;
+      let age = `max-age: ${60 * 60 * 24 * 31}`;
+      document.cookie = setting + ' ' + age;
+      console.log(document.cookie);
+    }
+    this.props.close();
+  }
+
+  handleChange(event) {
+    const currentField = event.target.id.split('numberInput')[1];
+    this.setState(() => {
+      return {[currentField]: event.target.value};
     });
   }
 
@@ -38,12 +75,16 @@ class Popup extends React.Component {
               <SettingsField 
                 leftSlot={<span>Auto-start</span>}
                 rightSlot={
-                  this.state.switchOn ? <SwitcherOn size={30} switch={this.switch} /> : <SwitcherOff size={30} switch={this.switch} />
+                  this.state.switchOn === 'true' ? <SwitcherOn size={30} switch={this.switch} /> : <SwitcherOff size={30} switch={this.switch} />
                 }
               />
               <SettingsField 
                 leftSlot={<span>Pomodoros before long break</span>}
-                rightSlot={<input id="numberInput" type="number" />}
+                rightSlot={
+                  <input id="numberInputpomodoros" type="number" 
+                    value={this.state.pomodoros} onChange={this.handleChange}
+                  />
+                }
               />
             </div>
           </div>
@@ -53,14 +94,19 @@ class Popup extends React.Component {
               {
                 ['working', 'break', 'long_break'].map((caption, key) => {
                   return <SettingsField key={key}
-                    leftSlot={caption[0].toUpperCase() + caption.slice(1).split('_').join(' ')}
-                    rightSlot={<input id={'numberInput' + caption} type="number" />}
+                    leftSlot={caption[0].toUpperCase() + caption.slice(1).split('_').join(' ') + ' (minutes)'}
+                    rightSlot={
+                      <input id={'numberInput' + caption} 
+                        type="number" onChange={this.handleChange} 
+                        value={this.state[caption]}
+                      />
+                    }
                   />
                 })
               }
             </div>
           </div>
-          <button id="okButton">Save</button>
+          <button id="okButton" onClick={this.save}>Save</button>
         </div>
       </div>
     );

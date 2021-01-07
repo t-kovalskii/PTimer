@@ -24,8 +24,7 @@ class Crown extends React.Component {
     });
   }
 
-  togglePopup(event) {
-    event.preventDefault();
+  togglePopup() {
     this.setState(state => {
       return {showPopup: !state.showPopup};
     });
