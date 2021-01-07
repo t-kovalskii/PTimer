@@ -14,8 +14,6 @@ class Popup extends React.Component {
   constructor(props) {
     super(props);
 
-    console.log(document.cookie);
-
     this.state = {
       switchOn: true,
       pomodoros: 4,
@@ -27,9 +25,20 @@ class Popup extends React.Component {
     this.save = this.save.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.switch = this.switch.bind(this);
+    this.readCookies = this.readCookies.bind(this);
+    this.close = this.close.bind(this);
   }
 
   componentDidMount() {
+    this.readCookies();
+  }
+
+  close() {
+    this.readCookies();
+    this.props.close();
+  }
+
+  readCookies() {
     for (let cookie of document.cookie.split('; ')) {
       let [name, value] = cookie.split('=');
       this.setState({[name]: value});
@@ -48,9 +57,8 @@ class Popup extends React.Component {
       let setting = `${cookie}= ${this.state[cookie]};`;
       let age = `max-age: ${60 * 60 * 24 * 31}`;
       document.cookie = setting + ' ' + age;
-      console.log(document.cookie);
     }
-    this.props.close();
+    this.close();
   }
 
   handleChange(event) {
@@ -67,7 +75,7 @@ class Popup extends React.Component {
           <div className="generalSettings">
             <div className="settingsHeader">
               <span id="settingsLabel">Settings</span>
-              <button id="closeButton" onClick={this.props.close}>
+              <button id="closeButton" onClick={this.close}>
                 <CloseIcon size={25} />
               </button>
             </div>

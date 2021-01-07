@@ -6,6 +6,26 @@ import TimerFace from './TimerFace';
 import TimerImage from './svg/timerImage';
 
 class Timer extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      secondsLeft: null, 
+      settings: null, 
+      currentTask: null,
+    };
+
+    this.initState = this.initState.bind(this);
+  }
+
+  componentDidMount() {
+    this.initState();
+  }
+
+  initState() {
+
+  }
+
   render() {
     return (
       <div className="timer">
