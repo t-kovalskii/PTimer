@@ -6,9 +6,12 @@ import ButtonImage from './svg/button';
 class Button extends React.Component {
   render() {
     return (
-      <div className="button">
-        <ButtonImage size={this.props.size} caption={this.props.caption} />
-      </div>
+      <button className="button" onClick={this.props.onClick}>
+        <ButtonImage 
+          id={this.props.id} size={this.props.size} 
+          caption={this.props.caption} color={this.props.color} 
+        />
+      </button>
     );
   }
 }

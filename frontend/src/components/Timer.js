@@ -9,28 +9,33 @@ class Timer extends React.Component {
   constructor(props) {
     super(props);
 
+    this.interval = null;
     this.state = {
-      secondsLeft: null, 
-      settings: null, 
-      currentTask: null,
+      secondsLeft: parseInt(props.settings[props.currentTask]) * 60 
     };
-
-    this.initState = this.initState.bind(this);
   }
 
-  componentDidMount() {
-    this.initState();
-  }
-
-  initState() {
-
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('should');
+    if (this.props.onPause !== nextProps.onPause) {
+      if (!nextProps.onPause) {
+        this.interval = setInterval(() => {
+          this.setState(state => {
+            return {secondsLeft: state.secondsLeft - 1};
+          });
+        }, 1000);
+      } else {
+        clearInterval(this.interval);
+      }
+    } 
+    return true;
   }
 
   render() {
     return (
       <div className="timer">
-        <TimerImage />
-        <TimerFace />
+        <TimerImage color={this.props.settings.taskColors[this.props.currentTask]} />
+        <TimerFace seconds={this.state.secondsLeft} />
       </div>
     );
   }

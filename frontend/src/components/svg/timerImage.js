@@ -12,7 +12,7 @@ class TimerImage extends React.Component {
         <path className="timerPath"
           style=
           {{
-            fill: 'none', stroke: /*should be dealt with when implementing states */'#E20613', 
+            fill: 'none', stroke: this.props.color, 
             strokeWidth: 5, strokeMiterlimit: 10
           }}
           d="M374.23,188.37c0,102.65-83.21,185.87-185.87,185.87S2.5,291.02,2.5,188.37S85.71,2.5,188.36,2.5

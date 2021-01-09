@@ -11,6 +11,11 @@
 }
 
 /* Buttons */
+.button {
+  background: none;
+  border: none;
+  outline: none;
+}
 .buttonCaption {
   font-family: 'Source Sans Pro', sans-serif;
   font-size: 80px;

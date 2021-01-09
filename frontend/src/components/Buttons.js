@@ -7,9 +7,17 @@ class Buttons extends React.Component {
     return (
       <div className="buttons">
         {
-          // temporary
           ['Pause', 'Stop', 'Skip'].map((caption, key) => {
-            return <Button size={140} caption={caption} key={key} />
+            let color = '#E30613';
+            let buttonCaption = caption; 
+
+            if (key === 0) buttonCaption = this.props.leftButtonCaption;
+            if (key === 2) color = this.props.rightButtonColor;
+
+            return <Button 
+              id={caption.toLowerCase()} size={140} caption={buttonCaption} key={key} 
+              onClick={this.props.onClick} color={color}
+            />  
           })
         }
       </div>
