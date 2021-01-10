@@ -8,8 +8,10 @@ class Button extends React.Component {
     return (
       <button className="button" onClick={this.props.onClick}>
         <ButtonImage 
-          id={this.props.id} size={this.props.size} 
-          caption={this.props.caption} color={this.props.color} 
+          className={this.props.nextTask ? this.props.id + '-' + this.props.nextTask : null}
+          id={this.props.id} 
+          size={this.props.size} 
+          caption={this.props.caption}
         />
       </button>
     );

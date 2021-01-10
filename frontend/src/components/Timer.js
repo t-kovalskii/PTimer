@@ -15,8 +15,8 @@ class Timer extends React.Component {
     };
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    console.log('should');
+  shouldComponentUpdate(nextProps) {
+    /* When continue/pause button is clicked */
     if (this.props.onPause !== nextProps.onPause) {
       if (!nextProps.onPause) {
         this.interval = setInterval(() => {
@@ -29,6 +29,10 @@ class Timer extends React.Component {
       }
     } 
     return true;
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
 
   render() {

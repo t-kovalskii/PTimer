@@ -21,3 +21,20 @@
   font-size: 80px;
   fill: white;
 }
+
+/* Skip buton styling */
+.buttonPath {
+  fill: rgb(237, 28, 36);
+}
+.skip-working {
+  transition: fill .15s;
+  fill: rgb(237, 28, 36)
+}
+.skip-break {
+  transition: fill .15s;
+  fill: #009245;
+}
+.skip-long_break {
+  transition: fill .15s;
+  fill: rgb(41, 171, 226);
+}

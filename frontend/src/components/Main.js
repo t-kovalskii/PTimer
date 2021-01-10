@@ -16,11 +16,18 @@ class Main extends React.Component {
     this.settings = {
       taskColors: {
         working: '#E30613',
-        break: '009245',
-        long_break: '29ABE2'
+        break: '#009245',
+        long_break: '#29ABE2'
       },
+      break: 5,
+      long_break: 15,
+      pomodoros: 4,
+      switchOn: false,
+      working: 25
     };
     this.state = {
+      // key for making timer rerender itself
+      timerKey: Math.random(),
       currentTask: 'working',
       onPause: true
     };
@@ -43,6 +50,7 @@ class Main extends React.Component {
   setSettings() {
     let settings = {};
     for (let cookie of document.cookie.split('; ')) {
+      if (!cookie) continue;
       let [name, value] = cookie.split('=');
       settings[name] = value;
     }
@@ -50,19 +58,21 @@ class Main extends React.Component {
   }
 
   onTimerFinish() {
-    if (this.currentTask === 'working') {
+    if (this.state.currentTask === 'working') {
       this.workCounter ++;
     }
-    this.setCurrentTask(
-      this.calculateNextTask()
-    );
-    if (this.workCounter === this.settings.pomodoros) {
+    // re-rendering the timer
+    this.setState({
+      currentTask: this.calculateNextTask(this.workCounter),
+      timerKey: Math.random()
+    });
+    if (this.workCounter === parseInt(this.settings.pomodoros)) {
       this.workCounter = 0;
     }
   }
 
-  calculateNextTask() {
-    if (this.workCounter === this.settings.pomodoros) {
+  calculateNextTask(workCounter) {
+    if (workCounter === parseInt(this.settings.pomodoros)) {
       return 'long_break';
     } else {
       return this.state.currentTask === 'working' ? 'break' : 'working';
@@ -81,11 +91,16 @@ class Main extends React.Component {
         });
         break;
       case 'stop':
-        this.setCurrentTask(this.state.currentTask);
+        // causing timer to re-render
+        this.setState({
+          timerKey: Math.random(),
+          onPause: true
+        });
         break;
       case 'skip':
         // calling timer finish event handler
         this.onTimerFinish();
+        console.log(this.workCounter);
         break;
       default:
         break;
@@ -100,6 +115,7 @@ class Main extends React.Component {
         </span>
         <section className="timersection">
           <Timer 
+            key={this.state.timerKey}
             settings={this.settings} onFinish={this.onTimerFinish}
             currentTask={this.state.currentTask} onPause={this.state.onPause}
           />
@@ -107,7 +123,15 @@ class Main extends React.Component {
         <section className="buttonssection">
           <Buttons 
             onClick={this.handleClick} leftButtonCaption={this.state.onPause ? 'Continue' : 'Pause'}
-            rightButtonColor={this.settings.taskColors[this.calculateNextTask()]}
+            rightButtonTask=
+            {
+              (function() {
+                let workCounter = this.workCounter;
+                return this.calculateNextTask(
+                  this.state.currentTask === 'working' ? ++ workCounter : workCounter
+                );
+              }).bind(this)()
+            }
           />
         </section>
       </main>
