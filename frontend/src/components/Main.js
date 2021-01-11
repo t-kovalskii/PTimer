@@ -63,6 +63,7 @@ class Main extends React.Component {
     }
     // re-rendering the timer
     this.setState({
+      onPause: !(this.settings.switchOn === 'true'),
       currentTask: this.calculateNextTask(this.workCounter),
       timerKey: Math.random()
     });
@@ -100,7 +101,6 @@ class Main extends React.Component {
       case 'skip':
         // calling timer finish event handler
         this.onTimerFinish();
-        console.log(this.workCounter);
         break;
       default:
         break;
@@ -115,7 +115,7 @@ class Main extends React.Component {
         </span>
         <section className="timersection">
           <Timer 
-            key={this.state.timerKey}
+            key={this.state.timerKey} timerKey={this.state.timerKey}
             settings={this.settings} onFinish={this.onTimerFinish}
             currentTask={this.state.currentTask} onPause={this.state.onPause}
           />

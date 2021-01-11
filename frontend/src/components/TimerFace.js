@@ -17,7 +17,22 @@ class TimerFace extends React.Component {
       minutes = '0' + minutes;
     }
 
-    return [minutes + '', seconds + ''].join(':');
+    const time = [minutes + '', seconds + ''].join(':');
+    const currentTask = this.props.currentTask;
+    if (this.props.onPause) {
+      document.title = 'PTimer';
+    } else {
+      document.title = currentTask[0].toUpperCase() + currentTask.slice(1).split('_').join(' ') + ' for ' + time;
+    }
+
+    return time;
+  }
+
+  shouldComponentUpdate(nextProps) {
+    if (nextProps.seconds === -1) {
+      this.props.onFinish();
+    }
+    return true;
   }
 
   render() {
