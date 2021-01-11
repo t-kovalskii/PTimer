@@ -54,8 +54,8 @@ class Popup extends React.Component {
   save() {
     // saving the cookies for a mounth
     for (let cookie of ['switchOn', 'pomodoros', 'working', 'break', 'long_break']) {
-      let setting = `${cookie}= ${this.state[cookie]};`;
-      let age = `max-age: ${60 * 60 * 24 * 31}`;
+      let setting = `${cookie}=${this.state[cookie]};`;
+      let age = `max-age= ${60 * 60 * 24 * 31}`;
       document.cookie = setting + ' ' + age;
     }
     this.close();

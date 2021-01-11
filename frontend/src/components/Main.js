@@ -42,11 +42,6 @@ class Main extends React.Component {
     this.setSettings();
   }
 
-  shouldComponentUpdate() {
-    this.setSettings();
-    return true;
-  }
-
   setSettings() {
     let settings = {};
     for (let cookie of document.cookie.split('; ')) {
