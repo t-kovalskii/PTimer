@@ -26,6 +26,9 @@ class Timer extends React.Component {
       window.timerKey = this.props.timerKey;
 
       if (!nextProps.onPause) {
+        this.setState(state => {
+          return {secondsLeft: state.secondsLeft - 1};
+        });
         this.interval = setInterval(() => {
           this.setState(state => {
             return {secondsLeft: state.secondsLeft - 1};

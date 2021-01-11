@@ -58,6 +58,9 @@ class Popup extends React.Component {
       let age = `max-age= ${60 * 60 * 24 * 31}`;
       document.cookie = setting + ' ' + age;
     }
+    // writing data in fields to settings and re-rendering main section
+    this.props.setSettings(true);
+
     this.close();
   }
 

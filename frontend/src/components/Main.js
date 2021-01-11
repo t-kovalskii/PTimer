@@ -13,18 +13,6 @@ class Main extends React.Component {
     super(props);
 
     this.workCounter = 0;
-    this.settings = {
-      taskColors: {
-        working: '#E30613',
-        break: '#009245',
-        long_break: '#29ABE2'
-      },
-      break: 5,
-      long_break: 15,
-      pomodoros: 4,
-      switchOn: false,
-      working: 25
-    };
     this.state = {
       // key for making timer rerender itself
       timerKey: Math.random(),
@@ -32,24 +20,13 @@ class Main extends React.Component {
       onPause: true
     };
 
-    this.setSettings = this.setSettings.bind(this);
     this.onTimerFinish = this.onTimerFinish.bind(this);
     this.setCurrentTask = this.setCurrentTask.bind(this);
     this.calculateNextTask = this.calculateNextTask.bind(this);
     this.handleClick = this.handleClick.bind(this);
 
     // reading cookies beforehand
-    this.setSettings();
-  }
-
-  setSettings() {
-    let settings = {};
-    for (let cookie of document.cookie.split('; ')) {
-      if (!cookie) continue;
-      let [name, value] = cookie.split('=');
-      settings[name] = value;
-    }
-    this.settings = Object.assign(this.settings, settings);
+    this.props.setSettings();
   }
 
   onTimerFinish() {
@@ -58,17 +35,17 @@ class Main extends React.Component {
     }
     // re-rendering the timer
     this.setState({
-      onPause: !(this.settings.switchOn === 'true'),
+      onPause: !(this.props.settings.switchOn === 'true'),
       currentTask: this.calculateNextTask(this.workCounter),
       timerKey: Math.random()
     });
-    if (this.workCounter === parseInt(this.settings.pomodoros)) {
+    if (this.workCounter === parseInt(this.props.settings.pomodoros)) {
       this.workCounter = 0;
     }
   }
 
   calculateNextTask(workCounter) {
-    if (workCounter === parseInt(this.settings.pomodoros)) {
+    if (workCounter === parseInt(this.props.settings.pomodoros)) {
       return 'long_break';
     } else {
       return this.state.currentTask === 'working' ? 'break' : 'working';
@@ -111,13 +88,13 @@ class Main extends React.Component {
         <section className="timersection">
           <Timer 
             key={this.state.timerKey} timerKey={this.state.timerKey}
-            settings={this.settings} onFinish={this.onTimerFinish}
+            settings={this.props.settings} onFinish={this.onTimerFinish}
             currentTask={this.state.currentTask} onPause={this.state.onPause}
           />
         </section>
         <section className="buttonssection">
           <Buttons 
-            onClick={this.handleClick} leftButtonCaption={this.state.onPause ? 'Continue' : 'Pause'}
+            onClick={this.handleClick} leftButtonCaption={this.state.onPause ? 'Start' : 'Pause'}
             rightButtonTask=
             {
               (function() {

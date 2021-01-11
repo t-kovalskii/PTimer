@@ -53,7 +53,7 @@ class Crown extends React.Component {
             />
           </svg>
         </button>
-        <Popup show={this.state.showPopup} close={this.togglePopup} />
+        <Popup show={this.state.showPopup} close={this.togglePopup} setSettings={this.props.setSettings} />
       </div>
     );   
   }

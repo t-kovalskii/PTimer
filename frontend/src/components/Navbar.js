@@ -13,7 +13,7 @@ export default function Navbar(props) {
           <span className="appname">PTimer</span>
           <Logo size={30} />
         </div>
-        <Crown size={35} />
+        <Crown size={35} setSettings={props.setSettings} />
       </header>
     );
 }
