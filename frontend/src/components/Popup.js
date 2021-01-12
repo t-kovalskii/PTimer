@@ -52,8 +52,26 @@ class Popup extends React.Component {
   }
 
   save() {
+    const fields = ['switchOn', 'pomodoros', 'working', 'break', 'long_break'];
+
+    // validating input
+    for (let field of fields.slice(1)) {
+      const fieldValue =  this.state[field] - 0;
+
+      if (this.state[field] === '') {
+        alert('Input is not valid. Please enter nonnegative integers');
+        return;
+      }
+      if (fieldValue >= 0 && parseInt(fieldValue) === fieldValue) {
+        continue;
+      }
+
+      alert('Input is not valid. Please enter nonnegative integers');
+      return;
+    }
+
     // saving the cookies for a mounth
-    for (let cookie of ['switchOn', 'pomodoros', 'working', 'break', 'long_break']) {
+    for (let cookie of fields) {
       let setting = `${cookie}=${this.state[cookie]};`;
       let age = `max-age= ${60 * 60 * 24 * 31}`;
       document.cookie = setting + ' ' + age;
@@ -92,7 +110,7 @@ class Popup extends React.Component {
               <SettingsField 
                 leftSlot={<span>Pomodoros before long break</span>}
                 rightSlot={
-                  <input id="numberInputpomodoros" type="number" 
+                  <input id="numberInputpomodoros" type="number" min="0" step="1"
                     value={this.state.pomodoros} onChange={this.handleChange}
                   />
                 }
@@ -107,7 +125,7 @@ class Popup extends React.Component {
                   return <SettingsField key={key}
                     leftSlot={caption[0].toUpperCase() + caption.slice(1).split('_').join(' ') + ' (minutes)'}
                     rightSlot={
-                      <input id={'numberInput' + caption} 
+                      <input id={'numberInput' + caption} min="0" step="1"
                         type="number" onChange={this.handleChange} 
                         value={this.state[caption]}
                       />
