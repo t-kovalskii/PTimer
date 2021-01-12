@@ -10,11 +10,14 @@ class Timer extends React.Component {
     super(props);
 
     this.interval = null;
+    this.animation = null;
+    this.totalSeconds = parseInt(props.settings[props.currentTask]) * 60;
     this.state = {
-      secondsLeft: parseInt(props.settings[props.currentTask]) * 60 
+      secondsLeft: this.totalSeconds
     };
 
     // starting timer at once if auto start is set
+    console.log('should');
     this.shouldComponentUpdate(this.props);
   }
 
@@ -26,6 +29,12 @@ class Timer extends React.Component {
       window.timerKey = this.props.timerKey;
 
       if (!nextProps.onPause) {
+        console.log(this.totalSeconds, this.state.secondsLeft);
+        this.animation = document.querySelector('.timerPath').animate(
+          [{strokeDasharray: '1168 0'}, {strokeDasharray: '0 1168'}],
+          {duration: this.totalSeconds * 1000, iterationStart: 1 - this.state.secondsLeft / this.totalSeconds}
+        );
+
         this.setState(state => {
           return {secondsLeft: state.secondsLeft - 1};
         });
@@ -35,20 +44,40 @@ class Timer extends React.Component {
           });
         }, 1000);
       } else {
+        console.log('else');
+        if (this.animation) {
+          this.animation.pause();
+        }
         clearInterval(this.interval);
       }
     } 
     return true;
   }
 
+  componentDidMount() {
+    // if this timer was created by "skip" button
+    if (!this.props.onPause) {
+      this.animation = document.querySelector('.timerPath').animate(
+        [{strokeDasharray: '1168 0'}, {strokeDasharray: '0 1168'}],
+        {duration: this.totalSeconds * 1000, iterationStart: 1 - this.state.secondsLeft / this.totalSeconds}
+      );
+    }
+  }
+
   componentWillUnmount() {
+    if (this.animation) {
+      this.animation.pause();
+    }
     clearInterval(this.interval);
   }
 
   render() {
     return (
       <div className="timer">
-        <TimerImage color={this.props.settings.taskColors[this.props.currentTask]} />
+        <TimerImage 
+          color={this.props.settings.taskColors[this.props.currentTask]} 
+          seconds={this.state.secondsLeft} total={this.totalSeconds}
+        />
         <TimerFace 
           seconds={this.state.secondsLeft} onFinish={this.props.onFinish} 
           currentTask={this.props.currentTask} onPause={this.props.onPause}

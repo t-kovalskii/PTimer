@@ -26,6 +26,9 @@
 .workCircleBox {
   margin: 0 8px;
 }
+.timerImage {
+  transform: rotate(0.75turn);
+}
 
 /* Buttons */
 .buttons {
