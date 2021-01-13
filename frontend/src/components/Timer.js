@@ -43,6 +43,8 @@ class Timer extends React.Component {
           case 'long_break':
             title = 'Have a long break';
             break;
+          default:
+            break;
         }
 
         new Notification(title);
