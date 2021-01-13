@@ -19,3 +19,13 @@
     transition: fill .25s;
     fill: rgb(206, 206, 206);
 }
+
+/* Popup */
+#closeIcon {
+    transition: fill 0.25s;
+    fill: #231F20;
+}
+#closeIcon-hovered {
+    transition: fill 0.25s;
+    fill: gray;
+}

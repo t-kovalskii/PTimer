@@ -96,9 +96,7 @@ class Popup extends React.Component {
           <div className="generalSettings">
             <div className="settingsHeader">
               <span id="settingsLabel">Settings</span>
-              <button id="closeButton" onClick={this.close}>
-                <CloseIcon size={25} />
-              </button>
+              <CloseIcon onClick={this.close} size={25} />
             </div>
             <div className="generalFields">
               <SettingsField 

@@ -38,20 +38,37 @@
   font-size: 80px;
   fill: white;
 }
-
-/* Skip buton styling */
 .buttonPath {
   fill: rgb(237, 28, 36);
 }
+.buttonPath, #skip {
+  transition: fill 0.25s;
+}
+.buttonPath:hover {
+  fill: rgb(170, 29, 33);
+}
+
+/* Skip buton styling */
 .skip-working {
   transition: fill .15s;
-  fill: rgb(237, 28, 36)
+  fill: rgb(237, 28, 36);
 }
+.skip-working:hover {
+  fill: rgb(170, 29, 33);
+}
+
 .skip-break {
   transition: fill .15s;
   fill: #009245;
 }
+.skip-break:hover {
+  fill: #006931;
+}
+
 .skip-long_break {
   transition: fill .15s;
   fill: rgb(41, 171, 226);
+}
+.skip-long_break:hover {
+  fill: rgb(35, 143, 189);
 }
