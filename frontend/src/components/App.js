@@ -26,6 +26,14 @@ export default class App extends React.Component {
     };
   }
 
+  componentDidMount() {
+    Notification.requestPermission().then((res) => {
+      if (res === 'denied') {
+        alert('Notifications are turned off, you will not recieve any alerts when timer is done');
+      }
+    });
+  }
+
   setSettings(update) {
     let settings = {};
     for (let cookie of document.cookie.split('; ')) {

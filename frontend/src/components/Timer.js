@@ -28,6 +28,26 @@ class Timer extends React.Component {
       window.timerKey = this.props.timerKey;
 
       if (!nextProps.onPause) {
+
+        // sending notification
+        const task = this.props.currentTask;
+        let title = null;
+
+        switch(task) {
+          case 'working':
+            title = 'Get to work';
+            break;
+          case 'break':
+            title = 'Take a break';
+            break;
+          case 'long_break':
+            title = 'Have a long break';
+            break;
+        }
+
+        new Notification(title);
+
+        // starting animation
         this.animation = document.querySelector('.timerPath').animate(
           [{strokeDasharray: '1168 0'}, {strokeDasharray: '0 1168'}],
           {duration: this.totalSeconds * 1000, iterationStart: 1 - this.state.secondsLeft / this.totalSeconds}

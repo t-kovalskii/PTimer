@@ -30,6 +30,12 @@ class TimerFace extends React.Component {
 
   shouldComponentUpdate(nextProps) {
     if (nextProps.seconds === -1) {
+      const task = this.props.currentTask.split('_').join(' ');
+      new Notification(
+        task[0].toUpperCase() + task.slice(1) + ' is over',
+        {body: this.props.settings.switchOn === 'true' ? 'Next task has started' : 'Start a new task manually'}
+      );
+
       this.props.onFinish();
     }
     return true;
