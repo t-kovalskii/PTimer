@@ -10,6 +10,7 @@
     background: none;
     border: none;
     outline: none;
+    cursor: pointer;
 }
 .crown_path {
     transition: fill .25s;

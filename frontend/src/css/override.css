@@ -1,9 +1,22 @@
 /* This file overrides default browser's css 
 *  and manipulates the style of the app block */
+html, body { 
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
 body {
     min-width: 255px;   
-    margin: 0;
 }
 .appBlock {
     z-index: 0;
+}
+
+@media only screen and (min-height: 850px) {
+    footer {
+        position: relative;
+        margin-top: 50px;
+    }
 }

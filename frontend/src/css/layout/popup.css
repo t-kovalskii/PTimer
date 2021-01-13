@@ -65,6 +65,20 @@
 }
 
 @media screen and (max-width: 660px) {
+  .popupInner {
+    height: 80%;
+    width: 70%;
+    top: 10%;
+    bottom: 10%;
+    left: 11.5%;
+    right: 15%;
+    margin: auto;
+    min-width: unset;
+  }
+  .popupInner input {
+    z-index: 1000;
+    width: 100%;
+  }
   .field {
     flex-direction: column;
     text-align: center;
