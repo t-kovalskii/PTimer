@@ -36,7 +36,7 @@ class Main extends React.Component {
     // re-rendering the timer
     this.setState({
       onPause: !(this.props.settings.switchOn === 'true'),
-      currentTask: this.calculateNextTask(this.workCounter),
+      currentTask: this.calculateNextTask(this.workCounter, this.state.currentTask),
       timerKey: Math.random()
     });
     if (this.workCounter === parseInt(this.props.settings.pomodoros)) {
@@ -44,11 +44,11 @@ class Main extends React.Component {
     }
   }
 
-  calculateNextTask(workCounter) {
+  calculateNextTask(workCounter, currentTask) {
     if (workCounter === parseInt(this.props.settings.pomodoros)) {
       return 'long_break';
     } else {
-      return this.state.currentTask === 'working' ? 'break' : 'working';
+      return currentTask === 'working' ? 'break' : 'working';
     }
   }
 
@@ -90,6 +90,7 @@ class Main extends React.Component {
             key={this.state.timerKey} timerKey={this.state.timerKey}
             settings={this.props.settings} onFinish={this.onTimerFinish}
             currentTask={this.state.currentTask} onPause={this.state.onPause}
+            calculateNextTask={this.calculateNextTask} workCounter={this.workCounter}
           />
         </section>
         <section className="buttonssection">
@@ -100,7 +101,8 @@ class Main extends React.Component {
               (function() {
                 let workCounter = this.workCounter;
                 return this.calculateNextTask(
-                  this.state.currentTask === 'working' ? ++ workCounter : workCounter
+                  this.state.currentTask === 'working' ? ++ workCounter : workCounter,
+                  this.state.currentTask
                 );
               }).bind(this)()
             }

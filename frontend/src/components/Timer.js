@@ -17,7 +17,6 @@ class Timer extends React.Component {
     };
 
     // starting timer at once if auto start is set
-    console.log('should');
     this.shouldComponentUpdate(this.props);
   }
 
@@ -29,7 +28,6 @@ class Timer extends React.Component {
       window.timerKey = this.props.timerKey;
 
       if (!nextProps.onPause) {
-        console.log(this.totalSeconds, this.state.secondsLeft);
         this.animation = document.querySelector('.timerPath').animate(
           [{strokeDasharray: '1168 0'}, {strokeDasharray: '0 1168'}],
           {duration: this.totalSeconds * 1000, iterationStart: 1 - this.state.secondsLeft / this.totalSeconds}
@@ -44,7 +42,6 @@ class Timer extends React.Component {
           });
         }, 1000);
       } else {
-        console.log('else');
         if (this.animation) {
           this.animation.pause();
         }
@@ -81,6 +78,8 @@ class Timer extends React.Component {
         <TimerFace 
           seconds={this.state.secondsLeft} onFinish={this.props.onFinish} 
           currentTask={this.props.currentTask} onPause={this.props.onPause}
+          settings={this.props.settings} calculateNextTask={this.props.calculateNextTask}
+          workCounter={this.props.workCounter}
         />
       </div>
     );

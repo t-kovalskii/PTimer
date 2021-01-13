@@ -43,8 +43,35 @@ class TimerFace extends React.Component {
             {this.formatTime(this.props.seconds)}
           </span>
           <div className="workCircles">
-            {/* temporary */}
-            {Array(5).fill(null).map((elem, index) => <WorkCircle key={index} size={20} color={'#29ABE2'} />)}
+            {
+              (function() {
+                const circles = [];
+                let currentTask = this.props.currentTask;
+
+                circles.push(
+                  <WorkCircle 
+                    id={!this.props.onPause ? 'currentCircle' : null} 
+                    size={20} color={this.props.settings.taskColors[currentTask]} key={0} 
+                  />
+                );       
+                
+                let workCounter = this.props.workCounter;
+                Array(4).fill(null).map((_, key) => {
+                  if (workCounter === parseInt(this.props.settings.pomodoros)) workCounter = 0;
+                  currentTask = this.props.calculateNextTask(
+                    currentTask === 'working' ? ++workCounter : workCounter,
+                    currentTask
+                  );
+                  circles.push(
+                    <WorkCircle size={20} color={this.props.settings.taskColors[currentTask]} key={key + 1} />
+                  );
+                  return null;
+                })
+
+                return circles;
+                
+              }).bind(this)()
+            }
           </div>
         </div>
       </div>
