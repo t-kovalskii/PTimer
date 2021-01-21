@@ -12,6 +12,7 @@
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 100;
+  overflow: auto;
 }
 .popupInner {
   display: flex;
@@ -24,6 +25,7 @@
   margin: auto;
   background: white;
   min-width: 215px;
+  /* min-height: 435px; */
 }
 
 .popupInner > input {
@@ -67,10 +69,10 @@
 @media screen and (max-width: 660px) {
   .popupInner {
     height: 80%;
-    width: 70%;
+    width: 71.5%;
     top: 10%;
     bottom: 10%;
-    left: 11.5%;
+    left: 10%;
     right: 15%;
     margin: auto;
     min-width: unset;
@@ -85,5 +87,13 @@
   }
   .rightSlot {
     margin: 5px auto;
+  }
+}
+
+@media screen and (max-height: 570px) {
+  .popupInner {
+    top: 5%;
+    bottom: 5%;
+    height: 90%;
   }
 }

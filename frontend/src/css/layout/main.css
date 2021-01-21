@@ -27,7 +27,11 @@
   margin: 0 8px;
 }
 .timerImage {
+  padding: 0 10px;
+}
+.timerPath {
   transform: rotate(0.75turn);
+  transform-origin: center;
 }
 
 /* Buttons */

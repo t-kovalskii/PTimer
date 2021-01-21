@@ -29,25 +29,27 @@ class Timer extends React.Component {
 
       if (!nextProps.onPause) {
 
-        // sending notification
-        const task = this.props.currentTask;
-        let title = null;
+        if ('Notification' in window) {
+          // sending notification
+          const task = this.props.currentTask;
+          let title = null;
 
-        switch(task) {
-          case 'working':
-            title = 'Get to work';
-            break;
-          case 'break':
-            title = 'Take a break';
-            break;
-          case 'long_break':
-            title = 'Have a long break';
-            break;
-          default:
-            break;
+          switch(task) {
+            case 'working':
+              title = 'Get to work';
+              break;
+            case 'break':
+              title = 'Take a break';
+              break;
+            case 'long_break':
+              title = 'Have a long break';
+              break;
+            default:
+              break;
+          }
+
+          new Notification(title);
         }
-
-        new Notification(title);
 
         // starting animation
         this.animation = document.querySelector('.timerPath').animate(
