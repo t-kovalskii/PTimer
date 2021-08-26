@@ -64,6 +64,7 @@
 
 #okButton {
   margin: auto;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 660px) {

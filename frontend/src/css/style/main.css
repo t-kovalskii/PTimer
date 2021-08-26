@@ -37,12 +37,15 @@
   font-family: 'Source Sans Pro', sans-serif;
   font-size: 80px;
   fill: white;
+  cursor: pointer;
 }
 .buttonPath {
   fill: rgb(237, 28, 36);
+  cursor: pointer;
 }
 .buttonPath, #skip {
   transition: fill 0.25s;
+  cursor: pointer;
 }
 .buttonPath:hover {
   fill: rgb(170, 29, 33);
